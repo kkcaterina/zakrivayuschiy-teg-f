@@ -4,13 +4,358 @@
 ✦ like-icon — для svg-иконки анимированного сердца
 ✦ card__like-button — для кнопки Like рядом с иконкой
 ✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 
 */
 
 .page {
+  font-family: var(--inter), sans-serif;
+  font-size: 18px;
+  background-color: var(--accent-color);
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-variation-settings: "wght" var(--regular-font-weight);
   min-inline-size: 320px;
   min-block-size: 100dvb;
+}
+
+.section-size {
+  width: var(--section-width);
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-height: 368px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  border: 2px solid var(--text-color);
+  overflow: hidden;
+  background-color: var(--accent-color);
+}
+
+h1,
+h2 {
+  font-family: "PressStart2P-Regular";
+}
+
+.header__title {
+  font-size: clamp(3.063rem, 4.923vw + 1.909rem, 4.063rem);
+  line-height: clamp(3.063rem, 4.923vw + 1.909rem, 4.063rem);
+}
+
+.header__subtitle {
+  font-size: clamp(0.875rem, 2.368vw + 0.401rem, 1.438rem);
+  line-height: clamp(0.875rem, 2.368vw + 0.401rem, 1.438rem);
+  text-transform: uppercase;
+}
+
+.content {
+  display: grid;
+  row-gap: 50px;
+}
+
+.card {
+  border: 2px solid var(--text-color);
+  overflow: hidden;
+  background-color: var(--accent-color);
+}
+
+.section__title {
+  padding: 5px 0 4px 10px;
+  font-size: 18px;
+  line-height: 21.78px;
+  font-variation-settings: "wght" var(--bold-font-weight);
+}
+
+.img__container {
+  position: relative;
+  display: flex;
+}
+
+img {
+  width: 100%;
+  border-top: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.label {
+  position: absolute;
+  top: 27px;
+  right: 25px;
+  opacity: 50%;
+  color: var(--text-color);
+  font-family: var(--press-star);
+  font-size: 14px;
+  line-height: 14px;
+  text-shadow: -1px 0 var(--accent-color), 0 1px var(--accent-color),
+    1px 0 var(--accent-color), 0 -1px var(--accent-color);
+  mix-blend-mode: hard-light;
+}
+
+@supports (
+  (text-stroke: 1px var(--accent-color)) or
+    (-webkit-text-stroke: 1px var(--accent-color))
+) {
+  .label {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--accent-color);
+    text-stroke: 1px var(--accent-color);
+  }
+}
+
+.description {
+  padding: 25px 25px 27px 25px;
+  line-height: 21px;
+}
+
+.memories {
+  padding: 0 25px 25.5px 25px;
+  line-height: 21px;
+}
+
+.card__icon-button {
+  height: 34px;
+  margin-top: 2px;
+  border: none;
+  outline: 2px solid transparent;
+}
+
+.card__like-button {
+  width: 130px;
+  height: 38px;
+  border: 2px solid var(--text-color);
+  font-family: var(--press-star);
+  font-size: 14px;
+  line-height: 12.6px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 3px;
+  margin-right: 25px;
+  padding-bottom: 25px;
+}
+
+button {
+  background-color: var(--accent-color);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.card__icon-button:focus-visible {
+  outline: 2px solid var(--text-color);
+  transition: outline 0.3s ease;
+}
+
+button:focus-visible:not(.card__icon-button) {
+  box-shadow: 2px 2px 0 var(--text-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.button__text {
+  position: relative;
+  z-index: 1;
+  color: var(--accent-color);
+  mix-blend-mode: difference;
+}
+
+.card__like-button,
+.save__button,
+.close__button {
+  position: relative;
+}
+
+.card__like-button:after,
+.save__button:after,
+.close__button:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+}
+
+.card__like-button:hover:after,
+.save__button:hover:after,
+.close__button:hover:after {
+  width: 100%;
+  background-color: var(--text-color);
+  transition: 0.5s ease-in-out;
+}
+
+.floppy {
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: difference;
+}
+
+.null-sprint-image {
+  filter: opacity(0.8);
+}
+
+.first-sprint-start-image {
+  filter: grayscale(0.9);
+}
+
+.first-sprint-end-image {
+  filter: contrast(200%);
+}
+
+.second-sprint-start-image {
+  filter: brightness(150%) hue-rotate(-90deg);
+}
+
+.second-sprint-end-image {
+  filter: invert(0.7);
+}
+
+.third-sprint-start-image {
+  filter: sepia(90%);
+}
+
+.third-sprint-end-image {
+  filter: hue-rotate(60deg);
+}
+
+.fourth-sprint-image {
+  filter: sepia(1) contrast(2) brightness(200%);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 47px 0 103px 0;
+}
+
+.footer > button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  font-family: var(--press-star);
+  font-size: 14px;
+  line-height: 12.6px;
+}
+
+dialog {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: min-content min-content;
+  align-items: center;
+  row-gap: 30px;
+  column-gap: 20px;
+  width: 353px;
+  height: 191px;
+  border: 2px solid var(--text-color);
+  padding: 30px;
+  overflow: hidden;
+}
+
+dialog:not([open]) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+dialog::backdrop {
+  opacity: 75%;
+  background-color: var(--text-color);
+}
+
+.dialog__text {
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+dialog button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 293px;
+  height: 38px;
+  font-family: var(--press-star);
+  font-size: 14px;
+  line-height: 12.6px;
+}
+
+.svg-button-wrapper {
+  width: 21px;
+  height: 21px;
+}
+
+.svg-dialog-wrapper {
+  width: 39px;
+  height: 39px;
+}
+
+.close__button {
+  grid-column: 1 / -1;
+  text-transform: uppercase;
+}
+
+@media (width <= 375px) {
+  .section-size {
+    width: 100%;
+  }
+
+  .header {
+    min-height: 327px;
+  }
+
+  .header__title {
+    font-size: 49px;
+    line-height: 49px;
+  }
+
+  .header__subtitle {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .label {
+    top: 25px;
+    right: 11px;
+  }
+
+  h3,
+  .third-sprint-end .description {
+    max-width: 351px;
+  }
+
+  .footer button {
+    flex-direction: column;
+  }
+
+  .svg-button-wrapper {
+    width: 29px;
+    height: 28px;
+  }
+
+  dialog {
+    width: 341px;
+    padding: 30px 38px;
+  }
+
+  dialog button {
+    width: 257px;
+  }
 }
