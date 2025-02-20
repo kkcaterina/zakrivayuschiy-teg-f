@@ -10,7 +10,7 @@
 */
 
 .page {
-  font-family: var(--inter), sans-serif;
+  font-family: var(--main-font);
   font-size: 18px;
   background-color: var(--accent-color);
   background-image: var(--bg-image);
@@ -34,27 +34,26 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  min-height: 368px;
   margin-top: 100px;
   margin-bottom: 100px;
   border: 2px solid var(--text-color);
-  overflow: hidden;
+  padding: 128px 0;
   background-color: var(--accent-color);
 }
 
-h1,
-h2 {
-  font-family: "PressStart2P-Regular";
+.header__title,
+.header__subtitle,
+.dialog__text {
+  font-family: var(--accent-font);
 }
 
 .header__title {
-  font-size: clamp(3.063rem, 4.923vw + 1.909rem, 4.063rem);
-  line-height: clamp(3.063rem, 4.923vw + 1.909rem, 4.063rem);
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 40625rem);
+  text-transform: uppercase;
 }
 
 .header__subtitle {
-  font-size: clamp(0.875rem, 2.368vw + 0.401rem, 1.438rem);
-  line-height: clamp(0.875rem, 2.368vw + 0.401rem, 1.438rem);
+  font-size: clamp(0.875rem, 0.2179rem + 2.8037vw, 1.4375rem);
   text-transform: uppercase;
 }
 
@@ -65,7 +64,6 @@ h2 {
 
 .card {
   border: 2px solid var(--text-color);
-  overflow: hidden;
   background-color: var(--accent-color);
 }
 
@@ -79,21 +77,25 @@ h2 {
 .img__container {
   position: relative;
   display: flex;
+  margin: 0;
+  border: 2px solid var(--text-color);
 }
 
 img {
   width: 100%;
   border-top: 2px solid var(--text-color);
   border-bottom: 2px solid var(--text-color);
+  object-fit: cover;
+  object-position: center;
 }
 
 .label {
   position: absolute;
-  top: 27px;
-  right: 25px;
+  top: 26px;
+  right: 23px;
   opacity: 50%;
   color: var(--text-color);
-  font-family: var(--press-star);
+  font-family: var(--accent-font);
   font-size: 14px;
   line-height: 14px;
   text-shadow: -1px 0 var(--accent-color), 0 1px var(--accent-color),
@@ -101,25 +103,27 @@ img {
   mix-blend-mode: hard-light;
 }
 
-@supports (
-  (text-stroke: 1px var(--accent-color)) or
-    (-webkit-text-stroke: 1px var(--accent-color))
-) {
+@supports (-webkit-text-stroke: 1px var(--accent-color)) {
   .label {
     text-shadow: none;
     -webkit-text-stroke: 1px var(--accent-color);
-    text-stroke: 1px var(--accent-color);
   }
 }
 
-.description {
-  padding: 25px 25px 27px 25px;
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  padding: 25px;
   line-height: 21px;
 }
 
-.memories {
-  padding: 0 25px 25.5px 25px;
-  line-height: 21px;
+.button:hover {
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
 }
 
 .card__icon-button {
@@ -127,15 +131,48 @@ img {
   margin-top: 2px;
   border: none;
   outline: 2px solid transparent;
+  background-color: var(--accent-color);
+  transition: outline 0.3s ease;
+}
+
+.card__icon-button:focus-visible {
+  outline: 2px solid var(--text-color);
+  transition: outline 0.3s ease;
+}
+
+.button-decor {
+  position: relative;
+  border: 2px solid var(--text-color);
+  font-family: var(--accent-font);
+  font-size: 14px;
+  line-height: 12.6px;
+  background-color: var(--accent-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.button-decor:focus-visible {
+  box-shadow: 2px 2px 0 var(--text-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.button-decor:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+  transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.button-decor:hover:after {
+  width: 100%;
+  background-color: var(--text-color);
+  transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .card__like-button {
   width: 130px;
   height: 38px;
-  border: 2px solid var(--text-color);
-  font-family: var(--press-star);
-  font-size: 14px;
-  line-height: 12.6px;
 }
 
 .buttons {
@@ -147,28 +184,6 @@ img {
   padding-bottom: 25px;
 }
 
-button {
-  background-color: var(--accent-color);
-}
-
-button:focus {
-  outline: none;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-.card__icon-button:focus-visible {
-  outline: 2px solid var(--text-color);
-  transition: outline 0.3s ease;
-}
-
-button:focus-visible:not(.card__icon-button) {
-  box-shadow: 2px 2px 0 var(--text-color);
-  transition: box-shadow 0.3s ease;
-}
-
 .button__text {
   position: relative;
   z-index: 1;
@@ -176,28 +191,25 @@ button:focus-visible:not(.card__icon-button) {
   mix-blend-mode: difference;
 }
 
-.card__like-button,
-.save__button,
+.save__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  font-family: var(--accent-font);
+  font-size: 14px;
+  line-height: 12.6px;
+}
+
 .close__button {
-  position: relative;
-}
-
-.card__like-button:after,
-.save__button:after,
-.close__button:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: 0%;
-  height: 100%;
-}
-
-.card__like-button:hover:after,
-.save__button:hover:after,
-.close__button:hover:after {
-  width: 100%;
-  background-color: var(--text-color);
-  transition: 0.5s ease-in-out;
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  text-transform: uppercase;
 }
 
 .floppy {
@@ -206,109 +218,79 @@ button:focus-visible:not(.card__icon-button) {
   mix-blend-mode: difference;
 }
 
-.null-sprint-image {
+.floppy__save {
+  width: 21px;
+  height: 21px;
+}
+
+.floppy__dialog {
+  width: 39px;
+  height: 39px;
+}
+
+.filter-opacity {
   filter: opacity(0.8);
 }
 
-.first-sprint-start-image {
+.filter-grayscale {
   filter: grayscale(0.9);
 }
 
-.first-sprint-end-image {
+.filter-contrast {
   filter: contrast(200%);
 }
 
-.second-sprint-start-image {
+.filter-brightness {
   filter: brightness(150%) hue-rotate(-90deg);
 }
 
-.second-sprint-end-image {
+.filter-invert {
   filter: invert(0.7);
 }
 
-.third-sprint-start-image {
+.filter-sepia {
   filter: sepia(90%);
 }
 
-.third-sprint-end-image {
+.filter-rotate {
   filter: hue-rotate(60deg);
 }
 
-.fourth-sprint-image {
+.filter-mix {
   filter: sepia(1) contrast(2) brightness(200%);
 }
 
-.footer {
+.section-save {
   display: flex;
   justify-content: center;
-  padding: 47px 0 103px 0;
+  padding-bottom: 103px;
 }
 
-.footer > button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 20px;
-  font-family: var(--press-star);
-  font-size: 14px;
-  line-height: 12.6px;
-}
-
-dialog {
+.dialog {
   display: grid;
-  grid-template-columns: min-content 1fr;
+  grid-template-columns: min-content 234px;
   grid-template-rows: min-content min-content;
   align-items: center;
   row-gap: 30px;
   column-gap: 20px;
-  width: 353px;
-  height: 191px;
   border: 2px solid var(--text-color);
   padding: 30px;
-  overflow: hidden;
 }
 
-dialog:not([open]) {
+.dialog:not([open]) {
   opacity: 0;
   pointer-events: none;
 }
 
-dialog::backdrop {
+.dialog::backdrop {
   opacity: 75%;
   background-color: var(--text-color);
 }
 
 .dialog__text {
+  font-weight: var(--regular-font-weight);
   font-size: 14px;
   line-height: 21px;
-  text-transform: uppercase;
-}
-
-dialog button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 293px;
-  height: 38px;
-  font-family: var(--press-star);
-  font-size: 14px;
-  line-height: 12.6px;
-}
-
-.svg-button-wrapper {
-  width: 21px;
-  height: 21px;
-}
-
-.svg-dialog-wrapper {
-  width: 39px;
-  height: 39px;
-}
-
-.close__button {
-  grid-column: 1 / -1;
   text-transform: uppercase;
 }
 
@@ -318,44 +300,34 @@ dialog button {
   }
 
   .header {
-    min-height: 327px;
+    padding: 120px 0;
   }
 
   .header__title {
-    font-size: 49px;
-    line-height: 49px;
-  }
-
-  .header__subtitle {
-    font-size: 14px;
-    line-height: 14px;
+    font-size: clamp(2.1875rem, -2.9034rem + 25.4545vw, 3.0625rem);
   }
 
   .label {
-    top: 25px;
-    right: 11px;
+    top: 23px;
+    right: 9px;
   }
 
-  h3,
-  .third-sprint-end .description {
-    max-width: 351px;
+  .section__title,
+  .description {
+    max-width: 315px;
   }
 
-  .footer button {
-    flex-direction: column;
-  }
-
-  .svg-button-wrapper {
-    width: 29px;
+  .floppy__save {
+    width: 28px;
     height: 28px;
   }
 
-  dialog {
-    width: 341px;
-    padding: 30px 38px;
+  .save__button {
+    flex-direction: column;
   }
 
-  dialog button {
-    width: 257px;
+  .dialog {
+    grid-template-columns: min-content 198px;
+    padding: 30px clamp(0.3125rem, -10.9602rem + 56.3636vw, 2.25rem);
   }
 }
