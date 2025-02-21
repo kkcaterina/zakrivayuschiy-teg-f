@@ -37,13 +37,11 @@
   margin-top: 100px;
   margin-bottom: 100px;
   border: 2px solid var(--text-color);
-  padding: 128px 0;
+  padding: clamp(7.5rem, 7.3239rem + 0.7512vw, 8rem) 0;
   background-color: var(--accent-color);
 }
 
-.header__title,
-.header__subtitle,
-.dialog__text {
+.text-decor {
   font-family: var(--accent-font);
 }
 
@@ -78,13 +76,12 @@
   position: relative;
   display: flex;
   margin: 0;
-  border: 2px solid var(--text-color);
+  border-top: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
 }
 
 img {
   width: 100%;
-  border-top: 2px solid var(--text-color);
-  border-bottom: 2px solid var(--text-color);
   object-fit: cover;
   object-position: center;
 }
@@ -92,10 +89,9 @@ img {
 .label {
   position: absolute;
   top: 26px;
-  right: 23px;
+  right: 25px;
   opacity: 50%;
   color: var(--text-color);
-  font-family: var(--accent-font);
   font-size: 14px;
   line-height: 14px;
   text-shadow: -1px 0 var(--accent-color), 0 1px var(--accent-color),
@@ -127,6 +123,8 @@ img {
 }
 
 .card__icon-button {
+  display: flex;
+  align-items: center;
   height: 34px;
   margin-top: 2px;
   border: none;
@@ -198,9 +196,6 @@ img {
   align-items: center;
   gap: 8px;
   padding: 16px 20px;
-  font-family: var(--accent-font);
-  font-size: 14px;
-  line-height: 12.6px;
 }
 
 .close__button {
@@ -278,7 +273,7 @@ img {
 }
 
 .dialog:not([open]) {
-  opacity: 0;
+  display: none;
   pointer-events: none;
 }
 
@@ -299,17 +294,13 @@ img {
     width: 100%;
   }
 
-  .header {
-    padding: 120px 0;
-  }
-
   .header__title {
     font-size: clamp(2.1875rem, -2.9034rem + 25.4545vw, 3.0625rem);
   }
 
   .label {
     top: 23px;
-    right: 9px;
+    right: 11px;
   }
 
   .section__title,
